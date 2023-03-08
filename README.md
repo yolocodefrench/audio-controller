@@ -13,3 +13,5 @@ pip install -r requirements.txt
 ```bash
 flask run --host=0.0.0.0
 ```
+
+![Server running on ip addresses](assets/addresses.PNG)
