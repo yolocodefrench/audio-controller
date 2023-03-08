@@ -15,8 +15,12 @@ def index():
     if request.method == 'POST':
         volume.SetMasterVolumeLevel(db_list[int(request.form['volume'])], None)
     
-    volume_level = [k for k, v in db_list.items() if v == volume.GetMasterVolumeLevel()][0]
-    
-    # the code below is executed if the request method
-    # was GET or the credentials were invalid
-    return render_template('index.html', volume=volume_level)
+    return render_template('index.html', volume=get_nearest_volume_index(volume.GetMasterVolumeLevel()))
+
+def get_nearest_volume_index(value):
+    list_items = tuple(db_list.items())
+
+    for index, v in list_items:
+        if value <= v:
+            return index
+            

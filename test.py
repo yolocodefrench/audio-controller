@@ -1,13 +1,13 @@
-from ctypes import cast, POINTER
-from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+import unittest
+from correspondance import db_list
+from app import get_nearest_volume_index
 
+class TestVolumeLevels(unittest.TestCase):
 
+    def test_volume_level(self):
 
-devices = AudioUtilities.GetSpeakers()
-interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-volume = cast(interface, POINTER(IAudioEndpointVolume))
-volume.SetMasterVolumeLevel(test[input_value], None)
+        value = get_nearest_volume_index(-19.828153610229499)
+        self.assertEqual(value, 27)
 
-print("blabla")
-
+if __name__ == '__main__':
+    unittest.main()

@@ -5,12 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Controle du volume audio</title>
-
+  <style>
+    body{
+      background-color: #2e2e2e;
+      display: flex;
+      justify-content: space-around;
+    }
+    input[type="range"][orient="vertical"] {
+      writing-mode: bt-lr;
+      appearance: slider-vertical;
+    }
+  </style>
 </head>
 <body>
-    <div id="app">
-      <Component/>
-    </div>
+  <div id="app">
+    <Component/>
+  </div>
 </body>
 <script type="module">
   import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
@@ -18,7 +28,23 @@
 
   const Component = {
     data() {return {vueVolume: volume}},
-    template: `<input type="range" id="volume" name="volume" v-model="vueVolume"/>`,
+    template: `
+      <input 
+        type="range"
+        id="volume"
+        name="volume"
+        v-model="vueVolume"
+        list="markers"
+        orient="vertical"
+      />
+      <datalist id="markers">
+        <option value="0" label="0"></option>
+        <option value="25" label="25"></option>
+        <option value="50" label="50"></option>
+        <option value="75" label="75"></option>
+        <option value="100" label="100"></option>
+      </datalist>
+      `,
     watch: {
       // whenever question changes, this function will run
       vueVolume(newVueVolume, oldVueVolume) {
